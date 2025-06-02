@@ -1,0 +1,502 @@
+﻿<Page x:Class="G2_Simulation.Views.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:G2_Simulation.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1600"
+      Title="SettingsPage">
+
+    <Border Background="#1a1a1a">
+
+        <Grid Margin="0,10,0,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition Width="977*"/>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="568*"/>
+                <ColumnDefinition Width="16*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="690*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Shadow Text-->
+            <TextBlock Grid.Column="1" 
+                    Text="SQUASH BALL SMASHER SIMULATION"
+                    FontFamily="Agency FB"
+                    FontSize="55"
+                    FontWeight="Bold"
+                    FontStyle="Italic"
+                    Foreground="#912e00"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" Margin="6,-1,0,0" Height="66" Width="769"/>
+
+            <!-- Main Text -->
+            <TextBlock Grid.Column="1" 
+                    Text="SQUASH BALL SMASHER SIMULATION"
+                    FontFamily="Agency FB"
+                    FontSize="55"
+                    FontWeight="Bold"
+                    FontStyle="Italic"
+                    Foreground="#FD7014"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" Margin="2,-4,0,0" Height="91" Width="755" Grid.RowSpan="2"/>
+
+            <!-- Home Button -->
+            <Border Width="55" Height="55" 
+                    CornerRadius="10" 
+                    Background="#e3e3e3" 
+                    Grid.Column="3" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0,-15,0,0">
+                <Button Background="Transparent" 
+                        BorderBrush="Transparent"
+                        Command="{Binding GoToMainPage}">
+                    <Image Source="/Assets/Images/HomeIcon.png" 
+                           Stretch="Uniform" 
+                           Width="62" Height="63" 
+                           Margin="-5,-5,0,0"/>
+                </Button>
+            </Border>
+
+            <!-- Set Default Button -->
+            <Border CornerRadius="20" 
+                    Width="220" Height="55"
+                    Background="#67AE6E" 
+                    Grid.Column="3"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0,-15,70,0">
+                <Button Content="RESET TO DEFAULT"
+                        Command="{Binding SetDefault}"
+                        Background="Transparent"
+                        Foreground="White"
+                        BorderBrush="Transparent"
+                        FontFamily="Agency FB"
+                        FontSize="32"
+                        FontWeight="Bold"/>
+            </Border>
+
+            <!-- Left Panel-->
+            <Border Background="#e3e3e3"
+                    CornerRadius="20" Margin="0,0,0,0" 
+                    Grid.Column="1" Grid.Row="1">
+
+                <DockPanel Width="900" Margin="20,0,0,0">
+                    <!-- Height Variables -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                Height="50" Width="900"
+                                Margin="0,10,0,0">
+
+                        <!-- Text -->
+                        <TextBlock Text="INITIAL HEIGHT"
+                               FontFamily="Agency FB"
+                               FontSize="40" FontWeight="Bold"
+                               FontStyle="Italic"
+                               Foreground="#1a1a1a" 
+                               DockPanel.Dock="Top"
+                               HorizontalAlignment="Right" 
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0" Width="210"/>
+
+                        <!-- Divider Line -->
+                        <Rectangle Width="680" Height="6" 
+                               Fill="#1a1a1a" 
+                               DockPanel.Dock="Top" 
+                               HorizontalAlignment="Right" 
+                               VerticalAlignment="Center"
+                               Margin="20,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Height Drop -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- HEIGHT OF DROPPING SQUASH BALL" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding HeightDrop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="200,0,0,0"/>
+                        <TextBlock Text="M" 
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a" 
+                                   HorizontalAlignment="Right"
+                                   Margin="25,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Height Collision -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- HEIGHT OF COLLISION" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding HeightCollision, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="369,0,0,0"/>
+                        <TextBlock Text="M" 
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a" 
+                                   HorizontalAlignment="Right"
+                                   Margin="25,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Collision Variables -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                Height="50" Width="900"
+                                Margin="0,20,0,0">
+
+                        <!-- Text -->
+                        <TextBlock Text="COLLISION"
+                                   FontFamily="Agency FB"
+                                   FontSize="40" FontWeight="Bold"
+                                   FontStyle="Italic"
+                                   Foreground="#1a1a1a" 
+                                   DockPanel.Dock="Top" 
+                                   HorizontalAlignment="Left" 
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,0,0"/>
+
+                        <!-- Divider Line -->
+                        <Rectangle Width="745" Height="6" 
+                                   Fill="#1a1a1a" 
+                                   DockPanel.Dock="Top" 
+                                   HorizontalAlignment="Right" 
+                                   VerticalAlignment="Center"
+                                   Margin="20,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Squash ball mass -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- SQUASH BALL MASS" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding BallMass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="383,0,0,0"/>
+                        <TextBlock Text="KG" 
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a" 
+                                   HorizontalAlignment="Right"
+                                   Margin="15,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Racket Mass -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- RACKET MASS" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding RacketMass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="455.5,0,0,0"/>
+                        <TextBlock Text="KG"
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Right"
+                                   Margin="15,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Moment Of Inertia -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- MOMENT OF INERTIA" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding MomentOfInertia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="386,0,0,0"/>
+                        <TextBlock Text="KG"
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Right"
+                                   Margin="15,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- e -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- COEFFICIENT OF RESTITUTION" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding CoefficientOfRestitution, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="276.5,0,0,0"/>
+                        <TextBlock Text=" "
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Right"
+                                   Margin="15,0,0,0"/>
+
+                    </StackPanel>
+
+                    <!-- Radius Collision -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- RADIUS OF COLLISION" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding CollisionRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="365.5,0,0,0"/>
+                        <TextBlock Text="M"
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Right"
+                                   Margin="30,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Machine Variables -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                Height="50" Width="900"
+                                Margin="0,20,0,0">
+
+                        <!-- Text -->
+                        <TextBlock Text="MACHINE"
+                                   FontFamily="Agency FB"
+                                   FontSize="40" FontWeight="Bold"
+                                   FontStyle="Italic"
+                                   Foreground="#1a1a1a" 
+                                   DockPanel.Dock="Top" 
+                                   HorizontalAlignment="Left" 
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,0,0"/>
+
+                        <!-- Divider Line -->
+                        <Rectangle Width="759" Height="6" 
+                                   Fill="#1a1a1a" 
+                                   DockPanel.Dock="Top" 
+                                   HorizontalAlignment="Right" 
+                                   VerticalAlignment="Center"
+                                   Margin="20,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- K Spring -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- K SPRING" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding KSpring, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="511,0,0,0"/>
+                        <TextBlock Text="N|M"
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Right"
+                                   Margin="7,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Spring Amount -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- SPRING AMOUNT" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding NSpring, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="427.2,0,0,0"/>
+                        <TextBlock Text="PCS"
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Right"
+                                   Margin="2,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Machine Eff. -->
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Height="43" Width="900"
+                                Margin="0,10,0,0">
+                        <TextBlock Text="- MACHINE EFFICIENCY" 
+                                   FontFamily="Agency FB"
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Left"
+                                   Margin="60,0,0,0"/>
+                        <TextBox Text ="{Binding MachineEff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:0.000}'}"
+                                 Width="150" Height="42"
+                                 FontFamily="Agency FB"
+                                 FontSize="35" FontWeight="Bold"
+                                 HorizontalAlignment="Center"
+                                 Margin="375,0,0,0"/>
+                        <TextBlock Text="%"
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a"
+                                   HorizontalAlignment="Right"
+                                   Margin="25,0,0,0"/>
+                    </StackPanel>
+                </DockPanel>
+
+            </Border>
+
+            <!-- Right Panel-->
+            <Border Background="#e3e3e3"
+                    CornerRadius="20" Margin="0,0,0,18" 
+                    Grid.Column="3"
+                    Grid.Row="1" Grid.RowSpan="2">
+
+                <DockPanel Width="564" Margin="0,0,0,0">
+                    <!-- Dropdown List -->
+                    <StackPanel Orientation="Horizontal" 
+                                DockPanel.Dock="Top" 
+                                Margin="0,20,0,0">
+                        <TextBlock Text="Select Map:" 
+                                   FontFamily="Agency FB" 
+                                   FontSize="35" FontWeight="Bold" 
+                                   Foreground="#1a1a1a" 
+                                   VerticalAlignment="Center" 
+                                   Margin="10,0,10,0"/>
+                        <ComboBox Width="200" 
+                                  Height="40" 
+                                  Background="White"
+                                  FontFamily="Agency FB" 
+                                  FontSize="30" 
+                                  FontWeight="Bold"
+                                  VerticalAlignment="Center"
+                                  ItemsSource="{Binding Maps}"
+                                  DisplayMemberPath="Name"
+                                  SelectedItem="{Binding SelectedMap, Mode=TwoWay}">
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="FontFamily" Value="Agency FB"/>
+                                    <Setter Property="FontSize" Value="30"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Map Image -->
+                    <StackPanel Orientation="Vertical" 
+                                DockPanel.Dock="Top">
+                        <Border>
+                            <Image Source="{Binding VerticalMapImage}" 
+                                   Height="677" Width="448"
+                                   Margin="0,15,0,0" Stretch="Uniform">
+                            </Image>
+                        </Border>
+                    </StackPanel>
+
+                </DockPanel>
+
+            </Border>
+
+        </Grid>
+
+    </Border>
+
+</Page>

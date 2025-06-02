@@ -1,0 +1,20 @@
+﻿<Window x:Class="G2_Simulation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:G2_Simulation"
+        mc:Ignorable="d"
+        Title="G2 Simulation" 
+        Icon="/Assets/Logo/FIBO_LOGO.ico"
+        Height="900" Width="1600"
+        Top="200" Left="200"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        Background="Black"
+        AllowsTransparency="False">
+    
+    <Grid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

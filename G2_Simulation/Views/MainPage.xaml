@@ -1,0 +1,626 @@
+﻿<Page x:Class="G2_Simulation.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:G2_Simulation.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1600"
+      Title="MainPage">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
+
+    <Border Background="#1a1a1a">
+
+        <Grid Margin="0,10,0,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="430*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="250*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Shadow Text-->
+            <TextBlock Grid.Column="1" 
+                    Text="SQUASH BALL SMASHER SIMULATION"
+                    FontFamily="Agency FB"
+                    FontSize="55"
+                    FontWeight="Bold"
+                    FontStyle="Italic"
+                    Foreground="#912e00"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" Margin="6,-1,0,0" Height="66" Width="769"/>
+
+            <!-- Main Text -->
+            <TextBlock Grid.Column="1" 
+                    Text="SQUASH BALL SMASHER SIMULATION"
+                    FontFamily="Agency FB"
+                    FontSize="55"
+                    FontWeight="Bold"
+                    FontStyle="Italic"
+                    Foreground="#FD7014"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" Margin="2,-4,0,0" Height="91" Width="755" Grid.RowSpan="2"/>
+
+            <!-- Setting Button -->
+            <Border Width="55" Height="55" 
+                CornerRadius="10" 
+                Background="#e3e3e3" 
+                Grid.Column="3" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,-15,0,0"
+                Panel.ZIndex="10">
+                <Button Background="Transparent" 
+                    BorderBrush="Transparent"
+
+                    Command="{Binding GoToSettingsPage}" >
+                    <Image Source="/Assets/Images/Gear.png" 
+                        Stretch="Uniform" 
+                        Width="47" Height="45" />
+                </Button>
+            </Border>
+
+            <!-- Left Panel -->
+            <Border Grid.Column="1" Grid.Row="1" 
+                Background="#e3e3e3" 
+                CornerRadius="20" 
+                Margin="0,0,0,18" 
+                Grid.RowSpan="4">
+                <DockPanel>
+
+                    <!-- Target Icon -->
+                    <Image Source="/Assets/Images/Target.png" 
+                        Width="64" Height="64" 
+                        Margin="15,140,10,0" />
+
+                    <!-- Target Distance Text -->
+                    <TextBlock
+                    Text="TARGET DISTANCE"
+                    FontFamily="Agency FB"
+                    FontSize="55"
+                    FontWeight="Bold"
+                    FontStyle="Italic"
+                    Foreground="#1a1a1a"
+                    VerticalAlignment="Center" Width="372"
+                    Margin="0,140,0,0"/>
+
+                    <!-- Divider Line -->
+                    <Rectangle Width="740" Height="2" 
+                            Fill="#1a1a1a" 
+                            Margin="-440,210,0,0" />
+
+                    <!-- Coordinate Type Toggle Button -->
+                    <ToggleButton Width="300" Height="80" 
+                                  Background="#ffffff" 
+                                  BorderBrush="#FD7014" 
+                                  BorderThickness="2" 
+                                  HorizontalAlignment="Left"
+                                  Margin="-745,310,0,0"
+                                  IsChecked="{Binding IsPolarMode, Mode=TwoWay}">
+                        <ToggleButton.Template>
+                            <ControlTemplate TargetType="ToggleButton">
+                                <Grid>
+                                    <!-- Background -->
+                                    <Border x:Name="SwitchBackground" 
+                                            CornerRadius="35" 
+                                            Background="#ffffff" 
+                                            BorderBrush="#FD7014" 
+                                            BorderThickness="2" />
+
+                                    <!-- Toggle Knob -->
+                                    <Border x:Name="Knob" 
+                                            Width="150" Height="70" 
+                                            Background="#FD7014" 
+                                            CornerRadius="30" 
+                                            HorizontalAlignment="Left" 
+                                            Margin="5,0,5,0" />
+
+                                    <!-- Coordinate Type Text -->
+                                    <Grid>
+                                        <TextBlock Text="CARTESIAN" 
+                                                   HorizontalAlignment="Left" 
+                                                   VerticalAlignment="Center" 
+                                                   Margin="18,0,0,0" 
+                                                   Foreground="#1a1a1a"
+                                                   FontSize="32"
+                                                   FontWeight="Bold" 
+                                                   FontFamily="Agency FB"/>
+
+                                        <TextBlock Text="POLAR" 
+                                                   HorizontalAlignment="Right" 
+                                                   VerticalAlignment="Center" 
+                                                   Margin="0,0,40,0" 
+                                                   Foreground="#1a1a1a" 
+                                                   FontSize="32"
+                                                   FontWeight="Bold"
+                                                   FontFamily="Agency FB"/>
+                                    </Grid>
+                                </Grid>
+
+                                <ControlTemplate.Triggers>
+                                    <!-- When Checked -->
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter TargetName="Knob" 
+                                                Property="HorizontalAlignment" 
+                                                Value="Right" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </ToggleButton.Template>
+                    </ToggleButton>
+
+                    <!-- X Coordinate -->
+                    <TextBlock Margin="-1320,600,0,0"
+                               Text="{Binding DisplayTextPos1}" 
+                               FontFamily="Agency FB" 
+                               FontSize="50" 
+                               FontWeight="Bold" 
+                               Foreground="#1a1a1a" 
+                               Width="143"/>
+
+                    <TextBox x:Name="XCoordBox" 
+                             Text="{Binding X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0}'}"
+                             Width="150" 
+                             Height="60"
+                             FontFamily="Agency FB"
+                             FontSize="50" 
+                             FontWeight="Bold"
+                             Margin="-1170,485,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsPolarMode}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBox x:Name="RCoordBox" 
+                             Text="{Binding R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0}'}"
+                             Width="150" 
+                             Height="60"
+                             FontFamily="Agency FB"
+                             FontSize="50" 
+                             FontWeight="Bold"
+                             Margin="-1170,485,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsPolarMode}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBlock Text="cm" 
+                               FontFamily="Agency FB" 
+                               FontSize="50" 
+                               FontWeight="Bold" 
+                               Foreground="#1a1a1a" 
+                               Margin="-500,600,0,0"/>
+
+                    <!-- Y Coordinate -->
+                    <TextBlock Margin="-1320,690,0,0"
+                               Text="{Binding DisplayTextPos2}" 
+                               FontFamily="Agency FB" 
+                               FontSize="50" 
+                               FontWeight="Bold" 
+                               Foreground="#1a1a1a" 
+                               Width="143"/>
+
+                    <TextBox x:Name="YCoordBox" 
+                             Text="{Binding Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0}'}"
+                             Width="150" 
+                             Height="60"
+                             FontFamily="Agency FB"
+                             FontSize="50" 
+                             FontWeight="Bold"
+                             Margin="-1170,665,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsPolarMode}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBox x:Name="ThetaCoordBox" 
+                             Text="{Binding ThetaDeg, Mode=TwoWay, StringFormat='{}{0}', UpdateSourceTrigger=PropertyChanged}"
+                             Width="150" 
+                             Height="60"
+                             FontFamily="Agency FB"
+                             FontSize="50" 
+                             FontWeight="Bold"
+                             Margin="-1170,665,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsPolarMode}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBlock Text="{Binding DisplayTextUnit}" 
+                               FontFamily="Agency FB" 
+                               FontSize="50" 
+                               FontWeight="Bold" 
+                               Foreground="#1a1a1a" 
+                               Margin="-500,690,0,0"/>
+
+                    <!-- Calculate Button -->
+                    <Border CornerRadius="20" 
+                            Width="400" Height="100"
+                            Background="#67AE6E" 
+                            Margin="-420,380,0,0">
+                        <Button Content="CALCULATE"
+                                Command="{Binding CalculateAll}"
+                                Width="400" Height="100"
+                                Background="Transparent"
+                                Foreground="White"
+                                BorderBrush="Transparent"
+                                FontFamily="Agency FB"
+                                FontSize="32"
+                                FontWeight="Bold"/>
+                    </Border>
+
+                    <!-- RESET Button -->
+                    <Border CornerRadius="20" 
+                        Width="400" Height="100"
+                        Background="#BF3131" 
+                        Margin="-440,625,0,0">
+                        <Button Content="RESET"
+                                Command="{Binding ResetCommand}"
+                                Width="400" Height="100"
+                                Background="Transparent"
+                                Foreground="White"
+                                BorderBrush="Transparent"
+                                FontFamily="Agency FB"
+                                FontSize="32"
+                                FontWeight="Bold"/>
+                    </Border>
+
+                    <Image Source="{Binding HorizontalMapImage}" 
+                           Height="400" Width="667"
+                           Margin="-760,-350,0,0" Stretch="Uniform">
+
+                    </Image>
+
+                    <!-- Target Position Visualize -->
+                    <Canvas x:Name="CoordinateCanvas" 
+        Width="560" Height="242"
+        Background="Transparent"
+        Margin="-748,-108,0,0">
+
+                        <!-- Map1 Axes -->
+                        <Line X1="-30" Y1="0" X2="570" Y2="0" Stroke="Gray" StrokeThickness="2"
+                              Visibility="{Binding IsMap1Selected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <Line X1="500" Y1="-200" X2="500" Y2="200" Stroke="Gray" StrokeThickness="2"
+                              Visibility="{Binding IsMap1Selected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                        <!-- Map1 Position Dot -->
+                        <Ellipse Fill="Red" Stroke="White" StrokeThickness="2"
+                                 Width="15" Height="15"
+                                 Canvas.Left="{Binding ScaledDotY}"
+                                 Canvas.Top="{Binding ScaledDotX}"
+                                 Margin="492,-7,0,0"
+                                 Visibility="{Binding IsMap1Selected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                        <!-- Map2 Axes -->
+                        <Line X1="-62" Y1="0" X2="603" Y2="0" Stroke="Gray" StrokeThickness="2"
+                              Visibility="{Binding IsMap2Selected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <Line X1="556" Y1="-135" X2="556" Y2="135" Stroke="Gray" StrokeThickness="2"
+                              Visibility="{Binding IsMap2Selected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                        <!-- Map2 Position Dot -->
+                        <Ellipse Fill="#FF3333" Stroke="White" StrokeThickness="2"
+                                 Width="15" Height="15"
+                                 Canvas.Left="{Binding ScaledDotY}"
+                                 Canvas.Top="{Binding ScaledDotX}"
+                                 Margin="550,-7,0,0"
+                                 Visibility="{Binding IsMap2Selected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </Canvas>
+
+                </DockPanel>
+            </Border>
+
+            <!-- Top Right Panel -->
+            <Border Grid.Column="3" 
+                    Background="#e3e3e3" 
+                    CornerRadius="20" 
+                    Margin="0,0,0,2" 
+                    Grid.Row="1">
+                <DockPanel>
+                    <!-- Coordinate System Background -->
+                    <Canvas Width="650" Height="300" Background="WhiteSmoke"
+                            Margin="70,0,0,0">
+                        <!-- Axes -->
+                        <Line X1="0" Y1="300" X2="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                        <Line X1="0" Y1="300" X2="650" Y2="300" Stroke="Black" StrokeThickness="1"/>
+
+                        <!-- Grid Lines -->
+                        <Line X1="65" Y1="0" X2="65" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="50" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="60,305,0,0"/>
+                        <Line X1="130" Y1="0" X2="130" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="100" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="120,305,0,0"/>
+                        <Line X1="195" Y1="0" X2="195" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="150" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="190,305,0,0"/>
+                        <Line X1="260" Y1="0" X2="260" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="200" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="250,305,0,0"/>
+                        <Line X1="325" Y1="0" X2="325" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="250" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="315,305,0,0"/>
+                        <Line X1="390" Y1="0" X2="390" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="300" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="380,305,0,0"/>
+                        <Line X1="455" Y1="0" X2="455" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="350" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="445,305,0,0"/>
+                        <Line X1="520" Y1="0" X2="520" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="400" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="510,305,0,0"/>
+                        <Line X1="585" Y1="0" X2="585" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="450" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="575,305,0,0"/>
+                        <Line X1="650" Y1="0" X2="650" Y2="300" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="500" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular" 
+                                   Margin="640,305,0,0"/>
+                        
+
+                        <Line X1="0" Y1="235" X2="650" Y2="235" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="50" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular"
+                                   Margin="-30,240,0,0">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <Line X1="0" Y1="170" X2="650" Y2="170" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="100" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular"
+                                   Margin="-30,175,0,0">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <Line X1="0" Y1="105" X2="650" Y2="105" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="150" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular"
+                                   Margin="-30,110,0,0">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <Line X1="0" Y1="40" X2="650" Y2="40" Stroke="LightGray" StrokeThickness="0.5"/>
+                        <TextBlock Text="200" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Agency FB" FontSize="16" FontWeight="Regular"
+                                    Margin="-30,45,0,0">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                       
+
+                        <!-- Trajectory -->
+                        <Polyline Points="{Binding TrajectoryPoints}" 
+                                  Stroke="OrangeRed" StrokeThickness="4"
+                                  StrokeDashArray="2 2"/>
+
+                    </Canvas>
+
+                    <!-- Axis Labels -->
+                    <TextBlock Text="Distance (cm)" HorizontalAlignment="Center" 
+                               FontFamily="Agency FB"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Margin="-700,430,0,0"/>
+                    <TextBlock Text="Height (cm)" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontFamily="Agency FB"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Margin="-1380,100,0,0">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="-90"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+
+
+                </DockPanel>
+            </Border>
+
+            <!-- Bottom Right Panel -->
+            <Border Grid.Column="3" 
+                Background="#e3e3e3"
+                CornerRadius="20" Margin="0,3,0,2" 
+                Grid.Row="3">
+                <DockPanel>
+
+                    <!-- Angle Racket Display -->
+                    <Canvas HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Margin="20,-300,0,0">
+
+                        <!-- Angle Icon -->
+                        <Image Source="/Assets/Images/AngleIcon.png" 
+                            Stretch="Uniform" 
+                            Width="227" Height="239" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Canvas.Left="0"
+                            Canvas.Top="0"/>
+
+                        <!-- Outer Circle -->
+                        <Ellipse Width="120" Height="120" 
+                                Stroke="#FD7014" StrokeThickness="10" 
+                                Fill="White" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Canvas.Left="110"
+                                Canvas.Top="75"/>
+
+                        <!-- Inner Text -->
+                        <TextBlock Text="{Binding AngleOfRacket, StringFormat='{}{0:00}°'}"
+                                   FontFamily="Agency FB" 
+                                   FontSize="60" FontWeight="Bold" 
+                                   Foreground="Black" 
+                                   Canvas.Left="140" 
+                                   Canvas.Top="100"/>
+
+                        <!-- Label -->
+                        <TextBlock Text="ANGLE OF RACKET" 
+                                FontFamily="Agency FB" 
+                                FontSize="32" FontWeight="Bold" 
+                                FontStyle="Italic" 
+                                Foreground="Black" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Canvas.Left="15"
+                                Canvas.Top="220"/>
+
+                    </Canvas>
+
+                    <!-- Delay Time Display -->
+                    <Canvas HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Margin="100,-460,0,0">
+
+                        <!-- Clock Icon -->
+                        <Image Source="/Assets/Images/ClockIcon.png" 
+                            Stretch="Uniform" 
+                            Width="536" Height="450" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Canvas.Left="0"
+                            Canvas.Top="0"/>
+
+                        <!-- Outer Circle -->
+                        <Ellipse Width="150" Height="150" 
+                                Stroke="#FD7014" StrokeThickness="10" 
+                                Fill="White" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Canvas.Left="193"
+                                Canvas.Top="128"/>
+
+                        <!-- Inner Text -->
+                        <TextBlock Text="{Binding DelayTime, StringFormat='{}{0}KΩ'}"
+                                   FontFamily="Agency FB" 
+                                   FontSize="60" FontWeight="Bold" 
+                                   Foreground="Black" 
+                                   Canvas.Left="210" 
+                                   Canvas.Top="170"/>
+
+                        <!-- Label -->
+                        <TextBlock Text="R DELAY TIME"  
+                                FontFamily="Agency FB" 
+                                FontSize="32" FontWeight="Bold" 
+                                FontStyle="Italic" 
+                                Foreground="Black" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Canvas.Left="200"
+                                Canvas.Top="300"/>
+
+                    </Canvas>
+
+                    <!-- Machine Position Display -->
+                    <Canvas HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Margin="210,-220,0,0">
+
+                        <!-- Rotate Icon -->
+                        <Image Source="/Assets/Images/RotateIcon.png" 
+                            Stretch="Uniform" 
+                            Width="191" Height="168" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Canvas.Left="0"
+                            Canvas.Top="0"/>
+
+                        <!-- Outer Circle -->
+                        <Ellipse Width="150" Height="150" 
+                                Stroke="#FD7014" StrokeThickness="10" 
+                                Fill="White" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Canvas.Left="10"
+                                Canvas.Top="10"/>
+
+                        <!-- Inner Text -->
+                        <TextBlock Text="{Binding MachinePosition, StringFormat='{}{0:+0;-0;0}°'}" 
+                                   FontFamily="Agency FB" 
+                                   FontSize="60" FontWeight="Bold" 
+                                   Foreground="Black" 
+                                   Canvas.Left="32" 
+                                   Canvas.Top="50"/>
+
+                        <!-- Label -->
+                        <TextBlock Text="MACHINE POSITION" 
+                                FontFamily="Agency FB" 
+                                FontSize="32" FontWeight="Bold" 
+                                FontStyle="Italic" 
+                                Foreground="Black" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Canvas.Left="-20"
+                                Canvas.Top="180"/>
+
+                    </Canvas>
+
+                </DockPanel>
+            </Border>
+
+
+        </Grid>
+
+
+    </Border>
+
+
+</Page>
